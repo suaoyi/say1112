@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时光印记 - 情侣记忆网站 | 记录爱情的每一刻</title>
+    <meta name="description" content="时光印记是一个专为情侣设计的记忆保存网站，上传照片和文字，记录你们的甜蜜时刻，创建属于你们的爱情时光胶囊。">
+    <meta name="keywords" content="情侣, 记忆, 时光胶囊, 爱情, 照片, 回忆, 浪漫, 恋爱, 纪念">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        :root {
+            --light-blue: #e6f7ff;
+            --sky-blue: #b3e0ff;
+            --soft-blue: #87ceeb;
+            --medium-blue: #5dade2;
+            --accent-blue: #3498db;
+            --deep-blue: #2980b9;
+            --text-dark: #2c3e50;
+            --text-medium: #566573;
+            --text-light: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: rgba(52, 152, 219, 0.2);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--light-blue), var(--sky-blue));
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            color: var(--deep-blue);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--deep-blue), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(52, 152, 219, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+        
+        .divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            margin: 30px auto;
+        }
+        
+        .upload-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--deep-blue);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(52, 152, 219, 0.5);
+            border-radius: 12px;
+            padding: 50px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.4s;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-5px);
+        }
+        
+        .upload-area i {
+            font-size: 3.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .upload-area p {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+        
+        .text-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-dark);
+            transition: all 0.3s;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .text-input::placeholder {
+            color: var(--text-medium);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--deep-blue));
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+        }
+        
+        .memories-section {
+            margin-top: 30px;
+        }
+        
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .memory-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px var(--shadow);
+            transition: all 0.4s;
+            position: relative;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
+        }
+        
+        .memory-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .memory-card:hover .memory-img {
+            transform: scale(1.05);
+        }
+        
+        .memory-content {
+            padding: 25px;
+        }
+        
+        .memory-text {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+        
+        .memory-date {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .memory-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .memory-card:hover .memory-actions {
+            opacity: 1;
+        }
+        
+        .memory-actions button {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .memory-actions button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .edit-btn {
+            color: var(--accent-blue);
+        }
+        
+        .delete-btn {
+            color: #e74c3c;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--text-medium);
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .empty-state p {
+            font-size: 1.2rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px 0;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(52, 152, 219, 0.2);
+        }
+        
+        .quote {
+            font-style: italic;
+            margin-top: 15px;
+            color: var(--deep-blue);
+            opacity: 0.8;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(230, 247, 255, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            width: 90%;
+            max-width: 650px;
+            box-shadow: 0 20px 40px var(--shadow);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-title {
+            font-size: 1.6rem;
+            color: var(--deep-blue);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-medium);
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: var(--accent-blue);
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .cancel-btn {
+            background: rgba(179, 224, 255, 0.5);
+            color: var(--text-dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cancel-btn:hover {
+            background: rgba(179, 224, 255, 0.8);
+        }
+        
+        .save-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--deep-blue));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .upload-section {
+                padding: 25px;
+            }
+            
+            .memories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .memory-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light-blue);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--deep-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Timeless Imprint</div>
+            <h1>时光印记</h1>
+            <div class="divider"></div>
+            <p class="subtitle">在时间的长河中，捕捉爱情的每一个珍贵片段，让回忆成为永恒</p>
+        </header>
+        
+        <section class="upload-section">
+            <h2 class="section-title">刻下我们的印记</h2>
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>选择或拖拽图片至此，记录此刻</p>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+            </div>
+            
+            <textarea class="text-input" id="textInput" placeholder="写下此刻的心情、故事或感悟..."></textarea>
+            
+            <button class="submit-btn" id="submitBtn">
+                <i class="fas fa-time-circle"></i> 保存时光印记
+            </button>
+        </section>
+        
+        <section class="memories-section">
+            <h2 class="section-title">我们的时光印记</h2>
+            <div class="memories-grid" id="memoriesGrid">
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-history"></i>
+                    <p>时光尚未留下印记，创建您的第一个回忆吧</p>
+                    <p class="quote">"爱情不是我们看着彼此，而是一起看向同一个方向"</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>时光印记 &copy; 2023 - 让爱在时光中永恒</p>
+            <p class="quote">"在时间的河流中，唯有真爱能留下永恒的印记"</p>
+        </footer>
+    </div>
+
+    <!-- 编辑模态框 -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">编辑时光印记</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="upload-area" id="editUploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>更换图片（可选）</p>
+                <input type="file" id="editImageInput" accept="image/*" style="display: none;">
+            </div>
+            <textarea class="text-input" id="editTextInput" placeholder="编辑您的文字..."></textarea>
+            <div class="modal-actions">
+                <button class="cancel-btn" id="cancelEdit">取消</button>
+                <button class="save-btn" id="saveEdit">保存更改</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM元素
+        const uploadArea = document.getElementById('uploadArea');
+        const imageInput = document.getElementById('imageInput');
+        const textInput = document.getElementById('textInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const memoriesGrid = document.getElementById('memoriesGrid');
+        const emptyState = document.getElementById('emptyState');
+        
+        // 编辑相关元素
+        const editModal = document.getElementById('editModal');
+        const editUploadArea = document.getElementById('editUploadArea');
+        const editImageInput = document.getElementById('editImageInput');
+        const editTextInput = document.getElementById('editTextInput');
+        const closeModal = document.getElementById('closeModal');
+        const cancelEdit = document.getElementById('cancelEdit');
+        const saveEdit = document.getElementById('saveEdit');
+        
+        // 当前编辑的记忆ID
+        let currentEditId = null;
+        
+        // 从本地存储加载回忆数据
+        let memories = loadMemoriesFromStorage();
+        
+        // 初始化显示回忆
+        renderMemories();
+        
+        // 上传区域点击事件
+        uploadArea.addEventListener('click', () => {
+            imageInput.click();
+        });
+        
+        // 编辑上传区域点击事件
+        editUploadArea.addEventListener('click', () => {
+            editImageInput.click();
+        });
+        
+        // 拖放功能
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--accent-blue)';
+            uploadArea.style.background = 'rgba(255, 255, 255, 0.9)';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = 'rgba(52, 152, 219, 0.5)';
+            uploadArea.style.background = 'rgba(255, 255, 255, 0.7)';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'rgba(52, 152, 219, 0.5)';
+            uploadArea.style.background = 'rgba(255, 255, 255, 0.7)';
+            
+            if (e.dataTransfer.files.length) {
+                imageInput.files = e.dataTransfer.files;
+                // 可以在这里添加图片预览功能
+                uploadArea.innerHTML = '<i class="fas fa-check-circle"></i><p>图片已选择，点击保存</p>';
+            }
+        });
+        
+        // 编辑区域拖放功能
+        editUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            editUploadArea.style.borderColor = 'var(--accent-blue)';
+            editUploadArea.style.background = 'rgba(255, 255, 255, 0.9)';
+        });
+        
+        editUploadArea.addEventListener('dragleave', () => {
+            editUploadArea.style.borderColor = 'rgba(52, 152, 219, 0.5)';
+            editUploadArea.style.background = 'rgba(255, 255, 255, 0.7)';
+        });
+        
+        editUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            editUploadArea.style.borderColor = 'rgba(52, 152, 219, 0.5)';
+            editUploadArea.style.background = 'rgba(255, 255, 255, 0.7)';
+            
+            if (e.dataTransfer.files.length) {
+                editImageInput.files = e.dataTransfer.files;
+                editUploadArea.innerHTML = '<i class="fas fa-check-circle"></i><p>新图片已选择</p>';
+            }
+        });
+        
+        // 提交按钮点击事件
+        submitBtn.addEventListener('click', () => {
+            const text = textInput.value.trim();
+            const file = imageInput.files[0];
+            
+            if (!file && !text) {
+                alert('请至少上传图片或输入文字！');
+                return;
+            }
+            
+            // 创建新的回忆对象
+            const newMemory = {
+                id: Date.now(),
+                text: text,
+                date: new Date().toLocaleDateString('zh-CN', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })
+            };
+            
+            // 如果有图片文件，创建对象URL
+            if (file) {
+                newMemory.image = URL.createObjectURL(file);
+            } else {
+                // 如果没有图片，使用默认图片
+                newMemory.image = 'https://images.unsplash.com/photo-1516487106395-f3c55b3dabeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60';
+            }
+            
+            // 添加到回忆数组
+            memories.unshift(newMemory);
+            
+            // 保存到本地存储
+            saveMemoriesToStorage();
+            
+            // 重新渲染回忆
+            renderMemories();
+            
+            // 清空表单
+            textInput.value = '';
+            imageInput.value = '';
+            uploadArea.innerHTML = '<i class="fas fa-cloud-upload-alt"></i><p>选择或拖拽图片至此，记录此刻</p>';
+            
+            // 显示成功消息
+            showNotification('时光印记已保存！');
+        });
+        
+        // 关闭模态框
+        closeModal.addEventListener('click', () => {
+            editModal.style.display = 'none';
+        });
+        
+        cancelEdit.addEventListener('click', () => {
+            editModal.style.display = 'none';
+        });
+        
+        // 保存编辑
+        saveEdit.addEventListener('click', () => {
+            const text = editTextInput.value.trim();
+            const file = editImageInput.files[0];
+            
+            if (!text) {
+                alert('请输入文字内容！');
+                return;
+            }
+            
+            // 更新回忆
+            const memoryIndex = memories.findIndex(m => m.id === currentEditId);
+            if (memoryIndex !== -1) {
+                memories[memoryIndex].text = text;
+                
+                // 如果有新图片，更新图片
+                if (file) {
+                    // 释放之前的对象URL（如果有）
+                    if (memories[memoryIndex].image.startsWith('blob:')) {
+                        URL.revokeObjectURL(memories[memoryIndex].image);
+                    }
+                    memories[memoryIndex].image = URL.createObjectURL(file);
+                }
+                
+                // 更新日期
+                memories[memoryIndex].date = new Date().toLocaleDateString('zh-CN', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // 保存到本地存储
+                saveMemoriesToStorage();
+                
+                // 重新渲染回忆
+                renderMemories();
+                
+                // 关闭模态框
+                editModal.style.display = 'none';
+                
+                // 显示成功消息
+                showNotification('时光印记已更新！');
+            }
+        });
+        
+        // 渲染回忆卡片
+        function renderMemories() {
+            // 清空网格
+            memoriesGrid.innerHTML = '';
+            
+            // 如果没有回忆，显示空状态
+            if (memories.length === 0) {
+                memoriesGrid.appendChild(emptyState);
+                return;
+            }
+            
+            // 创建并添加回忆卡片
+            memories.forEach(memory => {
+                const memoryCard = document.createElement('div');
+                memoryCard.className = 'memory-card';
+                
+                memoryCard.innerHTML = `
+                    <img src="${memory.image}" alt="回忆图片" class="memory-img">
+                    <div class="memory-actions">
+                        <button class="edit-btn" data-id="${memory.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn" data-id="${memory.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="memory-content">
+                        <p class="memory-text">${memory.text}</p>
+                        <p class="memory-date">${memory.date}</p>
+                    </div>
+                `;
+                
+                memoriesGrid.appendChild(memoryCard);
+            });
+            
+            // 添加编辑和删除事件监听
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.currentTarget.getAttribute('data-id'));
+                    openEditModal(id);
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.currentTarget.getAttribute('data-id'));
+                    deleteMemory(id);
+                });
+            });
+        }
+        
+        // 打开编辑模态框
+        function openEditModal(id) {
+            const memory = memories.find(m => m.id === id);
+            if (memory) {
+                currentEditId = id;
+                editTextInput.value = memory.text;
+                editModal.style.display = 'flex';
+                editUploadArea.innerHTML = '<i class="fas fa-cloud-upload-alt"></i><p>更换图片（可选）</p>';
+            }
+        }
+        
+        // 删除回忆
+        function deleteMemory(id) {
+            if (confirm('确定要删除这个时光印记吗？此操作不可撤销。')) {
+                const memoryIndex = memories.findIndex(m => m.id === id);
+                if (memoryIndex !== -1) {
+                    // 释放对象URL（如果是本地图片）
+                    if (memories[memoryIndex].image.startsWith('blob:')) {
+                        URL.revokeObjectURL(memories[memoryIndex].image);
+                    }
+                    
+                    // 从数组中删除
+                    memories.splice(memoryIndex, 1);
+                    
+                    // 保存到本地存储
+                    saveMemoriesToStorage();
+                    
+                    // 重新渲染
+                    renderMemories();
+                    
+                    // 显示成功消息
+                    showNotification('时光印记已删除！');
+                }
+            }
+        }
+        
+        // 保存回忆到本地存储
+        function saveMemoriesToStorage() {
+            // 创建一个简化的回忆数组，只保存必要信息
+            const simplifiedMemories = memories.map(memory => {
+                // 如果是外部URL，直接保存
+                if (!memory.image.startsWith('blob:')) {
+                    return memory;
+                }
+                
+                // 如果是blob URL，我们无法直接保存，所以保留文本和日期信息
+                return {
+                    id: memory.id,
+                    text: memory.text,
+                    date: memory.date,
+                    image: 'https://images.unsplash.com/photo-1516487106395-f3c55b3dabeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                };
+            });
+            
+            localStorage.setItem('timelessImprints', JSON.stringify(simplifiedMemories));
+        }
+        
+        // 从本地存储加载回忆
+        function loadMemoriesFromStorage() {
+            const storedMemories = localStorage.getItem('timelessImprints');
+            if (storedMemories) {
+                return JSON.parse(storedMemories);
+            }
+            
+            // 如果没有存储的回忆，返回示例数据
+            return [
+                {
+                    id: 1,
+                    image: 'https://images.unsplash.com/photo-1516487106395-f3c55b3dabeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                    text: '在星空下，我们许下永恒的誓言。那一刻，时间仿佛为我们静止。',
+                    date: '2023年8月15日 20:30'
+                },
+                {
+                    id: 2,
+                    image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                    text: '清晨的第一缕阳光洒在你的脸上，那是我见过最美的画面。',
+                    date: '2023年9月22日 06:45'
+                }
+            ];
+        }
+        
+        // 显示通知
+        function showNotification(message) {
+            // 创建通知元素
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 50px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 1001;
+                font-weight: 600;
+                animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // 3秒后移除通知
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+        
+        // 添加CSS动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
